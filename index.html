@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="theme-color" content="#ff2fa3" />
+  <title>Izzy Frame</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="app" aria-label="Izzy photo frame">
+    <div id="frame">
+      <div id="stage" role="img" aria-label="Slideshow image">
+        <div id="bg"></div>
+        <img id="photo" alt="Slideshow photo" />
+      </div>
+    </div>
+
+    <button id="gear" title="Settings" aria-label="Settings">⚙️</button>
+
+    <section id="settings" class="hidden" aria-label="Settings panel">
+      <div class="panel">
+        <h2>Izzy Frame Settings</h2>
+        <p class="hint">
+          To load photos from a Google Drive folder, you’ll need a Google API key (Drive API enabled).
+          This app only reads the folder list — it never uploads anything.
+        </p>
+
+        <label>
+          Folder ID
+          <input id="folderId" type="text" spellcheck="false" />
+        </label>
+
+        <label>
+          Google API Key
+          <input id="apiKey" type="password" placeholder="Paste API key…" spellcheck="false" />
+        </label>
+
+        <div class="row">
+          <label>
+            Seconds per photo
+            <input id="seconds" type="number" min="2" max="60" step="1" />
+          </label>
+
+          <label class="switch">
+            <input id="shuffle" type="checkbox" />
+            <span>Shuffle</span>
+          </label>
+        </div>
+
+        <div class="row">
+          <label class="switch">
+            <input id="kenburns" type="checkbox" />
+            <span>Slow zoom (Ken Burns)</span>
+          </label>
+
+          <label class="switch">
+            <input id="refresh" type="checkbox" />
+            <span>Auto-refresh folder</span>
+          </label>
+        </div>
+
+        <div class="actions">
+          <button id="save">Save</button>
+          <button id="test">Test Load</button>
+          <button id="close">Close</button>
+        </div>
+
+        <p id="status" class="status" role="status" aria-live="polite"></p>
+
+        <details class="help">
+          <summary>How do I create the API key?</summary>
+          <ol>
+            <li>Go to Google Cloud Console → APIs & Services.</li>
+            <li>Create a project (or use an existing one).</li>
+            <li>Enable “Google Drive API”.</li>
+            <li>Create Credentials → API Key.</li>
+            <li>(Optional) Restrict the key to your GitHub Pages domain later.</li>
+          </ol>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
