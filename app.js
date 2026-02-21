@@ -14,6 +14,8 @@ const DEFAULTS = {
 
 
 const FRAME_NATURAL = { w: 1268, h: 815 };
+// Photo window bounds in the frame artwork (pixels on the original frame image)
+const WINDOW_PX = { x: 161, y: 197, w: 939, h: 502 };
 // Photo window bounds measured on the frame image (normalized 0..1)
 function layoutStage(){
   const frame = document.getElementById("frame");
@@ -23,20 +25,27 @@ function layoutStage(){
 
   const cw = frame.clientWidth;
   const ch = frame.clientHeight;
-  const nw = art.naturalWidth || 1268;
-  const nh = art.naturalHeight || 815;
 
-  // match the exact rendered size of the frame artwork (object-fit: contain)
+  const nw = art.naturalWidth || FRAME_NATURAL.w;
+  const nh = art.naturalHeight || FRAME_NATURAL.h;
+
+  // object-fit: contain rect for the artwork inside the viewport
   const scale = Math.min(cw / nw, ch / nh);
   const rw = nw * scale;
   const rh = nh * scale;
   const ox = (cw - rw) / 2;
   const oy = (ch - rh) / 2;
 
-  stage.style.left = `${ox}px`;
-  stage.style.top = `${oy}px`;
-  stage.style.width = `${rw}px`;
-  stage.style.height = `${rh}px`;
+  // Window bounds scaled into the rendered artwork rect
+  const left = ox + (WINDOW_PX.x / nw) * rw;
+  const top  = oy + (WINDOW_PX.y / nh) * rh;
+  const width  = (WINDOW_PX.w / nw) * rw;
+  const height = (WINDOW_PX.h / nh) * rh;
+
+  stage.style.left = `${left}px`;
+  stage.style.top = `${top}px`;
+  stage.style.width = `${width}px`;
+  stage.style.height = `${height}px`;
 }
 
 const els = {
