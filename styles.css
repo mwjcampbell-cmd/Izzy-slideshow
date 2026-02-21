@@ -15,12 +15,14 @@ html,body{ height:100%; margin:0; background:#000; overflow:hidden; font-family:
   display:flex; align-items:center; justify-content:center;
   position:relative;
 }
+
 #stage{
   position:absolute;
-  overflow:hidden;
   inset:0;
+  overflow:hidden;
   z-index:2;
 }
+
 
 #bg{
   z-index:0;
@@ -31,16 +33,17 @@ html,body{ height:100%; margin:0; background:#000; overflow:hidden; font-family:
   transform: scale(1.08);
   opacity:.85;
 }
+
 #photo{
-  z-index:1;
-  position:absolute; inset:0;
-  width:100%; height:100%;
+  width:100%;
+  height:100%;
   object-fit: contain;
-  object-position:center;
-  filter: drop-shadow(0 10px 25px rgba(0,0,0,.35));
-  transition: opacity 900ms ease;
-  opacity:0;
+  position:absolute;
+  inset:0;
+  z-index:1;
+  transition:opacity 1s ease;
 }
+
 #photo.show{ opacity:1; }
 #photo.kenburns{ animation: kenburns 9s ease-in-out infinite alternate; }
 @keyframes kenburns{ from{transform:scale(1.00);} to{transform:scale(1.06);} }

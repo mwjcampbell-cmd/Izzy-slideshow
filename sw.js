@@ -1,4 +1,4 @@
-const CACHE_NAME = "izzy-frame-v5";
+const CACHE_NAME = "izzy-frame-v6";
 const APP_SHELL = [
   "./",
   "./index.html",
