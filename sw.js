@@ -1,14 +1,14 @@
 
-const CACHE_NAME = "izzy-frame-v1";
+const CACHE_NAME = "izzy-frame-v2";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
   "./manifest.webmanifest",
-  "./assets/frame_bg.png",
-  "./icons/icon-192.png",
-  "./icons/icon-512.png"
+  "./frame_bg.png",
+  "./icon-192.png",
+  "./icon-512.png"
 ];
 
 self.addEventListener("install", (event) => {
