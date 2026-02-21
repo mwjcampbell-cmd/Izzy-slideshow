@@ -10,13 +10,12 @@ html,body{ height:100%; margin:0; background:#000; overflow:hidden; font-family:
 #app{ height:100%; width:100%; display:flex; align-items:center; justify-content:center; position:relative; }
 #frame{
   height:100vh; width:100vw;
-  background: url("frame_bg.png") center/cover no-repeat;
+  background:#000;
   display:flex; align-items:center; justify-content:center;
   position:relative;
 }
 #stage{
-  width:min(78vw, 1350px);
-  aspect-ratio: 16 / 9;
+  position:absolute;
   border-radius: var(--stage-radius);
   overflow:hidden;
   position:relative;
@@ -100,3 +99,10 @@ button{ border:0; border-radius: 12px; padding: 10px 14px; cursor:pointer; font-
 .help{ margin-top: 10px; color: rgba(255,255,255,.82); }
 .help summary{ cursor:pointer; }
 .help ol{ margin: 8px 0 0 18px; }
+
+#frameArt{
+  position:absolute; inset:0;
+  width:100%; height:100%;
+  object-fit: contain;
+  pointer-events:none;
+}

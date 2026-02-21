@@ -12,6 +12,41 @@ const DEFAULTS = {
   refreshMinutes: 5
 };
 
+
+const FRAME_NATURAL = { w: 1268, h: 815 };
+// Photo window bounds measured on the frame image (normalized 0..1)
+const WINDOW = { x: 161/1268, y: 197/815, w: 939/1268, h: 502/815 };
+
+function layoutStage(){
+  const frame = document.getElementById("frame");
+  const art = document.getElementById("frameArt");
+  const stage = document.getElementById("stage");
+  if(!frame || !art || !stage) return;
+
+  const cw = frame.clientWidth;
+  const ch = frame.clientHeight;
+
+  const nw = art.naturalWidth || FRAME_NATURAL.w;
+  const nh = art.naturalHeight || FRAME_NATURAL.h;
+
+  const scale = Math.min(cw / nw, ch / nh);
+  const rw = nw * scale;
+  const rh = nh * scale;
+  const ox = (cw - rw) / 2;
+  const oy = (ch - rh) / 2;
+
+  // Convert normalized window box to pixels in the rendered image area
+  const left = ox + rw * WINDOW.x;
+  const top  = oy + rh * WINDOW.y;
+  const width  = rw * WINDOW.w;
+  const height = rh * WINDOW.h;
+
+  stage.style.left = `${left}px`;
+  stage.style.top = `${top}px`;
+  stage.style.width = `${width}px`;
+  stage.style.height = `${height}px`;
+}
+
 const els = {
   bg: document.getElementById("bg"),
   photo: document.getElementById("photo"),
@@ -243,3 +278,10 @@ if ("serviceWorker" in navigator) {
 }
 
 start();
+
+
+// Layout stage to match the frame window
+window.addEventListener('resize', layoutStage);
+const _art = document.getElementById('frameArt');
+if(_art){ _art.addEventListener('load', layoutStage); }
+layoutStage();
